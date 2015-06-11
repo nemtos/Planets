@@ -19,12 +19,33 @@ tasks.eclipse.dependsOn unpackNatives
 apply plugin: 'java'
 repositories {
     jcenter()
+    maven {
+        url "http://mvnrepository.com/artifact/"
+    }
+    ivy {
+        url "libs"
+    }
 }
 dependencies {
     compile 'org.lwjgl.lwjgl:lwjgl:2.9.1'
+    compile 'org.newdawn.slick:slick-util:1.0'
+    compile 'net.sf.jopt-simple:jopt-simple:4.8'
 }
 jar {
     manifest {
         attributes 'Main-Class': 'ru.newnope.planets.Planets'
     }
+}
+
+task zipNatives(type: Zip) {
+    classifier = 'natives'
+    from 'build/natives'
+    include '**/*'
+    dependsOn unpackNatives
+}
+task buildDistr(type: Copy) {
+    from('build/libs')
+    into('build/distributions')
+    include('*.jar')
+    dependsOn zipNatives
 }
