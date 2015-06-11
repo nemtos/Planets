@@ -1,0 +1,30 @@
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath "gradle.plugin.com.stehno:gradle-natives:0.2.3"
+  }
+}
+apply plugin: "com.stehno.natives"
+natives.jars = [ 'lwjgl-platform-2.9.1-natives-windows', 'jinput-platform-2.0.5-natives-windows',
+                 'lwjgl-platform-2.9.1-natives-linux', 'jinput-platform-2.0.5-natives-linux',
+                 'lwjgl-platform-2.9.1-natives-osx', 'jinput-platform-2.0.5-natives-osx']
+
+apply plugin: 'eclipse'
+tasks.eclipse.dependsOn unpackNatives
+
+apply plugin: 'java'
+repositories {
+    jcenter()
+}
+dependencies {
+    compile 'org.lwjgl.lwjgl:lwjgl:2.9.1'
+}
+jar {
+    manifest {
+        attributes 'Main-Class': 'ru.newnope.planets.Planets'
+    }
+}
