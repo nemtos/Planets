@@ -20,10 +20,26 @@ public class Planets {
 
 	private boolean shouldExit = false;
 	public static boolean working = true;
+	public static boolean pausePhys = false;
 	public static short ups = 20;
 	private float distance = -50, rotX = 45, rotZ = 0;
 	private int width, height;
 	private int clickX = 0, clickY = 0;
+	
+	private KeyBind[] keyBinds = new KeyBind[] {
+			new KeyBind(Keyboard.KEY_ESCAPE){
+				@Override
+				void pressed() {
+					shouldExit = true;
+				}
+			},
+			new KeyBind(Keyboard.KEY_SPACE){
+				@Override
+				void pressed() {
+					pausePhys = !pausePhys;
+				}
+			}
+	};
 	
 	private Planets(){}
 	
@@ -50,6 +66,7 @@ public class Planets {
 			RenderUtils.init(width, height);
 			ss.init();
 			Keyboard.create();
+			Keyboard.enableRepeatEvents(false);
 			Mouse.create();
 			while(!(Display.isCloseRequested() || shouldExit)){
 				working = Display.isVisible();
@@ -105,9 +122,8 @@ public class Planets {
 	}
 	
 	private void handleKeyboard() {
-		if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)){
-			shouldExit = true;
-		}
+		for(KeyBind kb : keyBinds)
+			kb.update();
 	}
 	
 	private void handleMouse() {
@@ -132,4 +148,27 @@ public class Planets {
     		distance = -100;
 	}
 
+	private static abstract class KeyBind {
+		
+		private final int key;
+		private boolean down = false;
+		
+		KeyBind(int key) {
+			this.key = key;
+		}
+		
+		abstract void pressed();
+		
+		void update() {
+			if(Keyboard.isKeyDown(key)){
+				if(!down) {
+					down = true;
+					pressed();
+				}
+			}else{
+				down = false;
+			}
+		}
+	}
+	
 }
