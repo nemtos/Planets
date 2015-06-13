@@ -5,6 +5,6 @@ import ru.newnope.planets.render.Texture;
 public interface IHasAtmosphere {
 	
 	public Texture getAtmosphereTexture();
-	public int getAtmosphereSize();
+	public float getAtmosphereSize();
 	
 }

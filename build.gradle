@@ -28,6 +28,7 @@ repositories {
 }
 dependencies {
     compile 'org.lwjgl.lwjgl:lwjgl:2.9.1'
+    compile 'org.lwjgl.lwjgl:lwjgl_util:2.9.1'
     compile 'org.newdawn.slick:slick-util:1.0'
     compile 'net.sf.jopt-simple:jopt-simple:4.8'
 }

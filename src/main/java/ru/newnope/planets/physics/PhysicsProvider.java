@@ -1,9 +1,12 @@
 package ru.newnope.planets.physics;
 
-import javafx.geometry.Point3D;
+import ru.newnope.planets.render.Coord3D;
 
 public abstract class PhysicsProvider {
 	
-	public abstract Point3D updatePosition();
+	/**
+	 * @return new coordinates or null if no update needed
+	 */
+	public abstract Coord3D updatePosition();
 	
 }
