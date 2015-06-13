@@ -58,7 +58,6 @@ public abstract class SpaceObject {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(rot, 0, 0, 1);
-		GL11.glClear(GL11.GL_DEPTH_BUFFER_BIT);
 		for(int list : glLists)
 			GL11.glCallList(list);
 		GL11.glPopMatrix();

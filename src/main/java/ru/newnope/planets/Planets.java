@@ -76,6 +76,7 @@ public class Planets {
 					handleMouse();
 					GL11.glPushMatrix();
 					moveCamera();
+					GL11.glClear(GL11.GL_DEPTH_BUFFER_BIT);
 					ss.render(framePart);
 					GL11.glPopMatrix();
 				}
