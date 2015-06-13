@@ -23,7 +23,7 @@
 
 ## Run paramethers
 
-Into the end of run command line you can add some paraemthers like '-fpsLimit 1000'
+Into the end of run command line you can add some paramethers like '-fpsLimit 1000'
 
 | Paramether | Value type | Description |
 |---|---|---|
