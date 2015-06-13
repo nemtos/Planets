@@ -26,7 +26,7 @@
 Into the end of run command line you can add some paraemthers like '-fpsLimit 1000'
 
 | Paramether | Value type | Description |
-|-|-|-|
+|---|---|---|
 | -width | Integer | Starting window width |
 | -height | Integer | Starting window height |
 | -samples | Byte (from 0 to 8) | Multisampling |
