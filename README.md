@@ -1,11 +1,12 @@
 # Planets
+[![Build Status](http://andrey96.ru:8080/job/Planets/badge/icon)](http://andrey96.ru:8080/job/Planets/)
 
 ## Editing
 
 1. Clone this repo
 2. Run 'gradlew eclipse'
 3. Run eclipse and import repository folder as an existing project
-3.1 To run project in eclipse you should add -Djava.library.path=build/natives/windows
+4. To run project in eclipse you should add -Djava.library.path=build/natives/windows
     (or .../linux for linux) to JVM arguments in run configuration
 
 ## Building
