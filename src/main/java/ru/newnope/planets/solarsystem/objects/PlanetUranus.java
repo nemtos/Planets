@@ -6,15 +6,15 @@ import ru.newnope.planets.render.Texture;
 import ru.newnope.planets.solarsystem.IHasRings;
 import ru.newnope.planets.solarsystem.SpaceObject;
 
-public class PlanetSaturn extends SpaceObject implements IHasRings{
+public class PlanetUranus extends SpaceObject implements IHasRings{
 
-	private final Texture rings = new Texture("saturn_rings.png");
+	private final Texture rings = new Texture("uranus_rings.png");
 	
 	private final PhysicsProvider physics;
 	
-	public PlanetSaturn(Sun sun) {
-		super("saturn.png", 1.7f);
-		this.physics = new RotationPhysicsProvider(sun, 45, .004f, -5f);
+	public PlanetUranus(Sun sun) {
+		super("uranus.png", 1.4f);
+		this.physics = new RotationPhysicsProvider(sun, 55, .0035f, -5f);
 	}
 
 	@Override
@@ -24,14 +24,12 @@ public class PlanetSaturn extends SpaceObject implements IHasRings{
 
 	@Override
 	public float getRingsSize() {
-		return 10f;
+		return 8f;
 	}
 
 	@Override
 	public PhysicsProvider getPhysics() {
 		return physics;
 	}
-	
-	
 	
 }

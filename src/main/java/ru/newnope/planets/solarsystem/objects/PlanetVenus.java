@@ -6,15 +6,15 @@ import ru.newnope.planets.render.Texture;
 import ru.newnope.planets.solarsystem.IHasAtmosphere;
 import ru.newnope.planets.solarsystem.SpaceObject;
 
-public class PlanetEarth extends SpaceObject implements IHasAtmosphere{
+public class PlanetVenus extends SpaceObject implements IHasAtmosphere{
 
-	private final Texture clouds = new Texture("clouds.png");
+private final Texture clouds = new Texture("venus_atm.png");
 	
 	private final PhysicsProvider physics;
 	
-	public PlanetEarth(Sun sun) {
-		super("earth.png", 1.2f);
-		this.physics = new RotationPhysicsProvider(sun, 19, .01f, -5f);
+	public PlanetVenus(Sun sun) {
+		super("venus.png", 1f);
+		this.physics = new RotationPhysicsProvider(sun, 14, .041f, -5f);
 	}
 
 	@Override
@@ -24,7 +24,7 @@ public class PlanetEarth extends SpaceObject implements IHasAtmosphere{
 
 	@Override
 	public float getAtmosphereSize() {
-		return 1.26f;
+		return 1.08f;
 	}
 
 	@Override

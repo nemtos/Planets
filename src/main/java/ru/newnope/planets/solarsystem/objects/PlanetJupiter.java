@@ -4,19 +4,18 @@ import ru.newnope.planets.physics.PhysicsProvider;
 import ru.newnope.planets.physics.RotationPhysicsProvider;
 import ru.newnope.planets.solarsystem.SpaceObject;
 
-public class SecondaryMoon extends SpaceObject{
-
+public class PlanetJupiter extends SpaceObject{
+	
 	private final PhysicsProvider physics;
 	
-	public SecondaryMoon(PlanetEarth earth) {
-		super("moon.png", .35f);
-		this.physics = new RotationPhysicsProvider(earth, 2.4f, .1f, -.1f);
-		((RotationPhysicsProvider)this.physics).tilt = -0.65f;
+	public PlanetJupiter(Sun sun) {
+		super("jupiter.png", 1.8f);
+		this.physics = new RotationPhysicsProvider(sun, 35, .005f, -5f);
 	}
-
+	
 	@Override
 	public PhysicsProvider getPhysics() {
 		return physics;
 	}
-
+	
 }
