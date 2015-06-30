@@ -8,6 +8,7 @@ public class Sun extends SpaceObject {
 	
 	public Sun() {
 		super("sun.png", 5F);
+		this.ignoreLight = true;
 	}
 
 	@Override
