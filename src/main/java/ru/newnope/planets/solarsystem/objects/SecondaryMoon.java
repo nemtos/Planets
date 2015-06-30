@@ -11,6 +11,7 @@ public class SecondaryMoon extends SpaceObject{
 	public SecondaryMoon(PlanetEarth earth) {
 		super("moon.png", .2f);
 		this.physics = new RotationPhysicsProvider(earth, 2, .1f, -.1f);
+		((RotationPhysicsProvider)this.physics).tilt = -0.65f;
 	}
 
 	@Override

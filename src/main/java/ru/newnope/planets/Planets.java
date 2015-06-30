@@ -85,7 +85,7 @@ public class Planets {
 				Display.update(); //Must be called even if display not visible
 				if(!Config.vSync)
 					Display.sync(Config.fpsLimit);
-				if(working){ //Count FPS only if display visible
+				if(working){ //Count FPS and tickPart only if display visible
 					long sysTime = System.currentTimeMillis();
 					long delta = sysTime - time;
 					if (delta >= 1000){

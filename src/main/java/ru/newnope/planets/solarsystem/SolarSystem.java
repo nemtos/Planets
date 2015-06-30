@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.newnope.planets.physics.PhysicsThread;
-import ru.newnope.planets.solarsystem.objects.PlanetEarth;
-import ru.newnope.planets.solarsystem.objects.SecondaryMoon;
-import ru.newnope.planets.solarsystem.objects.Stars;
-import ru.newnope.planets.solarsystem.objects.Sun;
+import ru.newnope.planets.solarsystem.objects.*;
 
 public class SolarSystem {
 	
@@ -21,6 +18,7 @@ public class SolarSystem {
 		PlanetEarth earth = new PlanetEarth(sun);
 		objects.add(earth);
 		objects.add(new SecondaryMoon(earth));
+		objects.add(new PlanetSaturn(sun));
 	}
 	
 	public void init() throws Exception{

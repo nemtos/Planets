@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL11;
+import static org.lwjgl.opengl.GL11.*;
 
 import ru.newnope.planets.physics.PhysicsProvider;
 import ru.newnope.planets.render.Coord3D;
@@ -19,6 +19,7 @@ public abstract class SpaceObject {
 	public final Texture texture;
 	private List<Integer> glLists = new ArrayList<>();
 	public final boolean hasAtmosphere = this instanceof IHasAtmosphere;
+	public final boolean hasRings = this instanceof IHasRings;
 	public boolean ignoreLight = false, renderInside = false;
 	
 	public SpaceObject(String textureName, float size) {
@@ -51,6 +52,12 @@ public abstract class SpaceObject {
 			tex.upload();
 			glLists.add(RenderUtils.prepareSphere(tex.id, atm.getAtmosphereSize()));
 		}
+		if(hasRings){
+			IHasRings rng = (IHasRings)this;
+			Texture tex = rng.getRingsTexture();
+			tex.upload();
+			glLists.add(RenderUtils.prepareSquare(tex.id, rng.getRingsSize()));
+		}
 	}
 	
 	public void render(float framePart) {
@@ -60,22 +67,22 @@ public abstract class SpaceObject {
 		FloatBuffer lightPosition = BufferUtils.createFloatBuffer(4);
         lightPosition.put(-x).put(-y).put(-z).put(0.0f).flip();
 		float rot = prevRot + (prevRot - this.rot) * framePart;
-		GL11.glPushMatrix();
+		glPushMatrix();
 		if(renderInside)
-			GL11.glDisable(GL11.GL_CULL_FACE);
+			glDisable(GL_CULL_FACE);
 		if(ignoreLight)
-			GL11.glDisable(GL11.GL_LIGHTING);
+			glDisable(GL_LIGHTING);
 		else
-			GL11.glLight(GL11.GL_LIGHT0, GL11.GL_POSITION, lightPosition);
-		GL11.glTranslatef(x, y, z);
-		GL11.glRotatef(rot, 0, 0, 1);
+			glLight(GL_LIGHT0, GL_POSITION, lightPosition);
+		glTranslatef(x, y, z);
+		glRotatef(rot, 0, 0, 1);
 		for(int list : glLists)
-			GL11.glCallList(list);
+			glCallList(list);
 		if(ignoreLight)
-			GL11.glEnable(GL11.GL_LIGHTING);
+			glEnable(GL_LIGHTING);
 		if(renderInside)
-			GL11.glEnable(GL11.GL_CULL_FACE);
-		GL11.glPopMatrix();
+			glEnable(GL_CULL_FACE);
+		glPopMatrix();
 	}
 	
 }
