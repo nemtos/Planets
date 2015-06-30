@@ -22,6 +22,7 @@ public class PhysicsThread extends Thread {
 				long time = System.currentTimeMillis();
 				if(Planets.working){
 					ss.updatePhysics();
+					Planets.physTicked = true;
 					if (System.currentTimeMillis() - utime >= 1000) {
 						utime = System.currentTimeMillis();
 						Planets.ups = ups;

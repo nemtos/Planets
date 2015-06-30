@@ -21,6 +21,7 @@ public class Planets {
 	private boolean shouldExit = false;
 	public static boolean working = true;
 	public static boolean pausePhys = false;
+	public static boolean physTicked = false;
 	public static short ups = 20;
 	private float distance = -50, rotX = 45, rotZ = 0;
 	private int width, height;
@@ -59,8 +60,9 @@ public class Planets {
 			if(Config.vSync)
 				Display.setVSyncEnabled(true);
 			long time = System.currentTimeMillis(); //For FPS counter
+			long utime = time; //For framePart calculation
 			int fps = 0;
-			float framePart = 0;
+			float tickPart = 0;
 			width = Display.getWidth();
 			height = Display.getHeight();
 			RenderUtils.init(width, height);
@@ -77,22 +79,29 @@ public class Planets {
 					GL11.glPushMatrix();
 					moveCamera();
 					GL11.glClear(GL11.GL_DEPTH_BUFFER_BIT);
-					ss.render(framePart);
+					ss.render(tickPart);
 					GL11.glPopMatrix();
 				}
 				Display.update(); //Must be called even if display not visible
 				if(!Config.vSync)
 					Display.sync(Config.fpsLimit);
 				if(working){ //Count FPS only if display visible
-					long delta = System.currentTimeMillis() - time;
-					if (delta >= 1000) {
+					long sysTime = System.currentTimeMillis();
+					long delta = sysTime - time;
+					if (delta >= 1000){
 						Display.setTitle(String.format("Planets (%d fps, %d ups)", ++fps, ups));
-						time = System.currentTimeMillis();
+						time = sysTime;
 						fps = 0;
 					}else{
-						framePart = delta/1000F;
 						fps++;
 					}
+					sysTime = System.currentTimeMillis();
+					if(physTicked){
+						physTicked = false;
+						utime = sysTime;
+					}
+					delta = sysTime - utime;
+					tickPart = (50-delta)/50f;
 				}
 				if(ss.physics.error)
 					throw new PhysicsException();
