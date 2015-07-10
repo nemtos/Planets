@@ -45,9 +45,20 @@ task zipNatives(type: Zip) {
     include '**/*'
     dependsOn unpackNatives
 }
+task copyDeps(type: Sync) {
+  from configurations.compile
+  into 'build/deps'
+  dependsOn zipNatives
+}
+task zipDeps(type: Zip) {
+    classifier = 'dependencies'
+    from 'build/deps'
+    include '**/*'
+    dependsOn copyDeps
+}
 task buildDistr(type: Copy) {
-    from('build/libs')
-    into('build/distributions')
-    include('*.jar')
-    dependsOn zipNatives
+    from 'build/libs'
+    into 'build/distributions'
+    include '*.jar'
+    dependsOn zipDeps
 }
