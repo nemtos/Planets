@@ -1,5 +1,5 @@
 # Planets
-[![Build Status](http://build.andrey96.ru/job/Planets/badge/icon)](http://build.andrey96.ru/job/Planets/)
+[![Build Status](http://build.andrey96.ru/job/Public/job/Planets/badge/icon)](http://build.andrey96.ru/job/Public/job/Planets/)
 
 ## Editing
 
@@ -17,7 +17,7 @@
 
 ## Running
 
-1. Build or download latest build from [build service](http://build.andrey96.ru/job/Planets/)
+1. Build or download latest build from [build service](http://build.andrey96.ru/job/Public/job/Planets/)
 2. Unpack correct natives folder from Planets-build..-natives.zip (windows folder is for windows, etc)
 3. Run 'java -Djava.library.path=windows -jar Planets-build...jar' (or use linux/osx instead of windows)
 
