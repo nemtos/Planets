@@ -4,7 +4,7 @@ import ru.newnope.planets.render.Texture;
 
 public interface IHasRings {
 	
-	public Texture getRingsTexture();
-	public float getRingsSize();
+	Texture getRingsTexture();
+	float getRingsSize();
 	
 }

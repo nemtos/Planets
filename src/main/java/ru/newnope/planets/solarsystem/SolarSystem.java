@@ -1,10 +1,20 @@
 package ru.newnope.planets.solarsystem;
 
+import ru.newnope.planets.physics.PhysicsThread;
+import ru.newnope.planets.solarsystem.objects.PlaneMercury;
+import ru.newnope.planets.solarsystem.objects.PlanetEarth;
+import ru.newnope.planets.solarsystem.objects.PlanetJupiter;
+import ru.newnope.planets.solarsystem.objects.PlanetMars;
+import ru.newnope.planets.solarsystem.objects.PlanetNeptune;
+import ru.newnope.planets.solarsystem.objects.PlanetSaturn;
+import ru.newnope.planets.solarsystem.objects.PlanetUranus;
+import ru.newnope.planets.solarsystem.objects.PlanetVenus;
+import ru.newnope.planets.solarsystem.objects.SecondaryMoon;
+import ru.newnope.planets.solarsystem.objects.Stars;
+import ru.newnope.planets.solarsystem.objects.Sun;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import ru.newnope.planets.physics.PhysicsThread;
-import ru.newnope.planets.solarsystem.objects.*;
 
 public class SolarSystem {
 	
@@ -34,13 +44,10 @@ public class SolarSystem {
 	}
 	
 	public void render(float framePart) {
-		for(SpaceObject obj : objects)
-			obj.render(framePart);
+		objects.forEach(obj -> obj.render(framePart));
 	}
 	
 	public void updatePhysics() {
-		for(SpaceObject obj : objects)
-			obj.update();
+		objects.forEach(SpaceObject::update);
 	}
-	
 }

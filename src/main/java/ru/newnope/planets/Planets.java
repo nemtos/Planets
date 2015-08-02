@@ -1,20 +1,18 @@
 package ru.newnope.planets;
 
-import java.nio.ByteBuffer;
-
-import javax.swing.JOptionPane;
-
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.PixelFormat;
-
 import ru.newnope.planets.physics.PhysicsException;
 import ru.newnope.planets.render.RenderUtils;
 import ru.newnope.planets.resources.Resources;
 import ru.newnope.planets.solarsystem.SolarSystem;
+
+import javax.swing.*;
+import java.nio.ByteBuffer;
 
 public class Planets {
 
@@ -23,10 +21,10 @@ public class Planets {
 	public static boolean pausePhys = false;
 	public static boolean physTicked = false;
 	public static short ups = 20;
-	private float distance = -50, rotX = 45, rotZ = 0;
+	private float distance = -100, rotX = 45, rotZ = 0;
 	private int width, height;
 	private int clickX = 0, clickY = 0;
-	
+
 	private KeyBind[] keyBinds = new KeyBind[] {
 			new KeyBind(Keyboard.KEY_ESCAPE){
 				@Override
@@ -41,13 +39,13 @@ public class Planets {
 				}
 			}
 	};
-	
+
 	private Planets(){}
-	
+
 	public static void main(String[] args) {
 		new Planets().start(args);
 	}
-	
+
 	private void start(String[] args) {
 		try{
 			Config.readFromArgs(args);
@@ -107,7 +105,7 @@ public class Planets {
 					throw new PhysicsException();
 			}
 		}catch(Throwable th){
-			JOptionPane.showMessageDialog(null, th.getMessage(), "Error (stack trace in console)", 0);
+			JOptionPane.showMessageDialog(null, th.getMessage(), "Error (stack trace in console)", JOptionPane.ERROR_MESSAGE);
 			if(!(th instanceof PhysicsException))
 				th.printStackTrace();
 		}finally{
@@ -116,7 +114,7 @@ public class Planets {
 			System.exit(0);
 		}
 	}
-	
+
 	private void checkSize() {
 		if(!(width==Display.getWidth() && height==Display.getHeight())){
 			width = Display.getWidth();
@@ -124,18 +122,18 @@ public class Planets {
 			RenderUtils.setupView(width, height);
 		}
 	}
-	
+
 	private void moveCamera() {
 		GL11.glTranslatef(0, 0, distance);
 	    GL11.glRotatef(rotX, -1, 0, 0);
 	    GL11.glRotatef(rotZ, 0, 0, -1);
 	}
-	
+
 	private void handleKeyboard() {
 		for(KeyBind kb : keyBinds)
 			kb.update();
 	}
-	
+
 	private void handleMouse() {
 		int dWheel = Mouse.getDWheel();
         if(dWheel!=0){
@@ -159,16 +157,16 @@ public class Planets {
 	}
 
 	private static abstract class KeyBind {
-		
+
 		private final int key;
 		private boolean down = false;
-		
+
 		KeyBind(int key) {
 			this.key = key;
 		}
-		
+
 		abstract void pressed();
-		
+
 		void update() {
 			if(Keyboard.isKeyDown(key)){
 				if(!down) {
@@ -180,5 +178,5 @@ public class Planets {
 			}
 		}
 	}
-	
+
 }

@@ -11,8 +11,8 @@ public class Config {
 	public static String resDir = "resources";
 	public static byte samples = 8;
 	public static short details = 50;
-	public static int width = 800;
-	public static int height = 600;
+	public static int width = 1024;
+	public static int height = 768;
 	
 	public static void readFromArgs(String[] args) {
 		OptionParser op = new OptionParser();

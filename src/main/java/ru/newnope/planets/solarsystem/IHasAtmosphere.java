@@ -4,7 +4,7 @@ import ru.newnope.planets.render.Texture;
 
 public interface IHasAtmosphere {
 	
-	public Texture getAtmosphereTexture();
-	public float getAtmosphereSize();
+	Texture getAtmosphereTexture();
+	float getAtmosphereSize();
 	
 }
